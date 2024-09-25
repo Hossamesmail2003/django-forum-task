@@ -10,8 +10,12 @@ class Question(models.Model):
     content =models.TextField(max_length=500)
     create_date=models.DateTimeField(default=timezone.now)
     tags = TaggableManager()
+    def __str__(self):
+        return self.question
 class Answers(models.Model):
     author = models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='answer_user')
     answer = models.TextField(max_length=500)
     question = models.ForeignKey(Question,related_name='answer_ques',on_delete=models.CASCADE)
     create_date=models.DateTimeField(default=timezone.now)
+    def __str__(self):
+        return self.answer
